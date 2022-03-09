@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Recorder -- DZ </title>
+    <link rel="shortcut icon" href="abc.png" type="image/x-icon">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Licorice&family=Luxurious+Roman&family=Montserrat:ital,wght@0,400;0,600;0,800;1,200;1,400;1,600&family=Pacifico&family=Rock+3D&family=Vujahday+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+    <div style="display: flex; justify-content: center; align-items: center; color: #1A2E39;">
+            <lord-icon
+            src="https://cdn.lordicon.com/smeqxwcv.json"
+            trigger="loop"
+            style="width:130px;height:130px">
+            </lord-icon>
+            <h1><b>SCREEN RECORDER</b></h1>
+    </div>
+ 
+    <center>
+        <video  width='75%' height='50%' controls></video>
+    </center>
+    <br>
+    <center>
+   🔥🔥 created by <a style="text-decoration: none; color: #1A2E39;" href="https://farhanibnesaif.vercel.app/"> DZ </a>
+    </center>
+    
+    <script>
+        const start = async()=>{
+            const stream = await navigator.mediaDevices.getDisplayMedia({
+                video: {
+                    mediaSource: 'screen'
+                }
+            });
+
+            const data = []
+
+            const mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable=(e)=>{    
+            data.push(e.data);
+            }
+            
+            mediaRecorder.start();
+            
+            mediaRecorder.onstop=(e)=>{
+            document.querySelector('video').src = URL.createObjectURL(new Blob(data,{
+            type: data[0].type
+            }));
+            }
+
+        }
+
+      
+        start();
+    </script>
+    
+
+</body>
+</html>
